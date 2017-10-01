@@ -1,15 +1,26 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import Guess from '../actions/guess'
+// import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 
 class Guesses extends PureComponent {
 
-
   render() {
     return(
-      <h2 className="Guesses">{ this.props.Guess }</h2>
+      <div className="Guesses">
+      <h3 className="Guessed">You have guessed: { this.props.guesses }</h3>
+      </div>
     )
   }
 }
 
-export default Guesses
+const mapStateToProps = ({ guesses }) => ({ guesses })
+// function mapStateToProps(state) {
+//   let { guesses } = state;
+//   return { guesses };
+// }
+// function mapStateToProps({ guesses }) {
+//   return { guesses };
+// }
+
+export default connect (mapStateToProps)(Guesses)
