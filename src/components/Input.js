@@ -14,7 +14,7 @@ class Input extends PureComponent {
   //   content: PropTypes.string.isRequired,
   // }
 
-  
+
 
   validate() {
   const isLetterValid = this.validateLetter()
@@ -40,16 +40,26 @@ class Input extends PureComponent {
   saveLetter() {
     if (!this.validate()) return
     this.props.guess(this.state.letter)
-
-
+    this.setState({
+      letter: "",
+    })
+    this.refs.input.focus();
   }
+
+
+
+
   render() {
     const { errors } = this.state
 
     return(
+
+
+
       <div className="input">
         <input
           type="text"
+          ref="input"
           className="letter"
           placeholder="Enter your guess here"
           value={this.state.letter}
@@ -60,6 +70,7 @@ class Input extends PureComponent {
           <button className="primary" onClick={this.saveLetter.bind(this)}>Guess</button>
           </div>
         </div>
+
 
     )
   }

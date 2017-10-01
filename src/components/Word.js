@@ -2,13 +2,11 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 
-
 class Word extends PureComponent {
 
 
 showGuess() {
-    const guesses = this.props.guesses
-    const word = "hello"
+    const { word, guesses } = this.props;
     var rightLetters = word.split("");
     return rightLetters.map(function(letter) {
       if (guesses.indexOf(letter) === -1) {
@@ -26,5 +24,5 @@ showGuess() {
     )
   }
 }
-const mapStateToProps = ({ guesses }) => ({ guesses })
+const mapStateToProps = ({ guesses, word }) => ({ guesses, word })
 export default connect (mapStateToProps)(Word)

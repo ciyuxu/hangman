@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 class Guesses extends PureComponent {
 
+  
+
   render() {
     return(
       <div className="Guesses">
