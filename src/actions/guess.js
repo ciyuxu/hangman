@@ -1,9 +1,14 @@
 export const GUESS = 'GUESS'
 
-export default (guess) => ({
-  type: GUESS,
-  payload: guess
-})
+export default (guess) => {
+  return (dispatch, getState) => {
+    const { word } = getState();
+    dispatch({
+      type: GUESS,
+      payload: { guess, isRight: word.includes(guess) }
+    });
+  };
+}
 
 // function a() {
 //   return 1;

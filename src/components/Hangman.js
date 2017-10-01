@@ -4,13 +4,7 @@ import newGame from '../actions/new-game'
 
 
 class Hangman extends PureComponent {
-  countdown() {
-    const guessNr = this.props.guesses.length
-    const chances = 6
-    if (guessNr < chances) {
-      return chances - guessNr
-    }
-  }
+
 
   startANewGame() {
     this.props.newGame()
@@ -18,10 +12,27 @@ class Hangman extends PureComponent {
 
 
 
+  showImages() {
+    const initialState = 6
+    var showImageNr = initialState - this.props.countdown
+    var images = []
+    for (let i = 0; i < showImageNr; i++) {
+      images.unshift(
+        <img src={`/images/${i + 1}.jpg`} key={i} />
+      )
+    }
+    return images
+  }
+
+
+
+
+
   render() {
     return (
       <div className="Hangman">
-        <h1 className="Countdown">{ this.countdown() }</h1>
+        {this.showImages()}
+        <h1 className="Countdown">{ this.props.countdown } guesses left</h1>
         <div className="actions">
         <button className="primary" onClick={this.startANewGame.bind(this)}>Start a New Game</button>
         </div>
@@ -30,7 +41,7 @@ class Hangman extends PureComponent {
   }
 
 }
-const mapStateToProps = ({ guesses }) => ({ guesses })
+const mapStateToProps = ({ guesses, countdown }) => ({ guesses, countdown })
 const mapDispatchToProps = { newGame }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hangman)
